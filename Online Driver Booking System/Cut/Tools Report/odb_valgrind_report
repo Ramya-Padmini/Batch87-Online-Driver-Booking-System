@@ -1,0 +1,43 @@
+==518973== Memcheck, a memory error detector
+==518973== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==518973== Using Valgrind-3.16.1 and LibVEX; rerun with -h for copyright info
+==518973== Command: ./odb
+==518973== 
+==518973== Syscall param write(buf) points to uninitialised byte(s)
+==518973==    at 0x49388F3: write (write.c:26)
+==518973==    by 0x48C9664: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1181)
+==518973==    by 0x48C89D5: new_do_write (fileops.c:449)
+==518973==    by 0x48CA708: _IO_new_do_write (fileops.c:426)
+==518973==    by 0x48CA708: _IO_do_write@@GLIBC_2.2.5 (fileops.c:423)
+==518973==    by 0x48C9FEF: _IO_file_close_it@@GLIBC_2.2.5 (fileops.c:136)
+==518973==    by 0x48BD375: fclose@@GLIBC_2.2.5 (iofclose.c:53)
+==518973==    by 0x109E42: list_to_user (in /home/cg87-user27/Project/odb)
+==518973==    by 0x109434: main (in /home/cg87-user27/Project/odb)
+==518973==  Address 0x4a28649 is 9 bytes inside a block of size 4,096 alloc'd
+==518973==    at 0x483877F: malloc (vg_replace_malloc.c:307)
+==518973==    by 0x48BD13B: _IO_file_doallocate (filedoalloc.c:101)
+==518973==    by 0x48CBA4F: _IO_doallocbuf (genops.c:347)
+==518973==    by 0x48CBA4F: _IO_doallocbuf (genops.c:342)
+==518973==    by 0x48CABF7: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:745)
+==518973==    by 0x48C9CDD: _IO_new_file_xsputn (fileops.c:1244)
+==518973==    by 0x48C9CDD: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1197)
+==518973==    by 0x48BE5BC: fwrite (iofwrite.c:39)
+==518973==    by 0x109E14: list_to_user (in /home/cg87-user27/Project/odb)
+==518973==    by 0x109434: main (in /home/cg87-user27/Project/odb)
+==518973== 
+==518973== 
+==518973== HEAP SUMMARY:
+==518973==     in use at exit: 552 bytes in 8 blocks
+==518973==   total heap usage: 22 allocs, 14 frees, 30,008 bytes allocated
+==518973== 
+==518973== LEAK SUMMARY:
+==518973==    definitely lost: 0 bytes in 0 blocks
+==518973==    indirectly lost: 0 bytes in 0 blocks
+==518973==      possibly lost: 0 bytes in 0 blocks
+==518973==    still reachable: 552 bytes in 8 blocks
+==518973==         suppressed: 0 bytes in 0 blocks
+==518973== Rerun with --leak-check=full to see details of leaked memory
+==518973== 
+==518973== Use --track-origins=yes to see where uninitialised values come from
+==518973== For lists of detected and suppressed errors, rerun with: -s
+==518973== ERROR SUMMARY: 3 errors from 1 contexts (suppressed: 0 from 0)
