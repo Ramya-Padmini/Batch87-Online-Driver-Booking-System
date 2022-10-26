@@ -1,0 +1,120 @@
+cg87-user27@instance-1:~/Project$ splint odb_main.c
+Splint 3.1.2 --- 21 Feb 2021
+
+odb_main.c:21: Include file <termios.h> matches the name of a POSIX library,
+    but the POSIX library is not being used.  Consider using +posixlib or
+    +posixstrictlib to select the POSIX library, or -warnposix to suppress this
+    message.
+  Header name matches a POSIX header, but the POSIX library is not selected.
+  (Use -warnposixheaders to inhibit warning)
+odb_main.c: (in function main)
+odb_main.c:37:2: Return value (type int) ignored: user_to_list()
+  Result returned by function call is not used. If this is intended, can cast
+  result to (void) to eliminate message. (Use -retvalint to inhibit warning)
+odb_main.c:38:2: Return value (type int) ignored: driver_to_list()
+odb_main.c:39:2: Return value (type int) ignored: report_to_list()
+odb_main.c:50:3: Return value (type int) ignored: scanf("%d", &ch)
+odb_main.c:61:6: Return value (type int) ignored: user_menu()
+odb_main.c:72:6: Return value (type int) ignored: driver_menu()
+odb_main.c:83:6: Return value (type int) ignored: admin_menu()
+odb_main.c:91:2: Return value (type int) ignored: list_to_user()
+odb_main.c:92:2: Return value (type int) ignored: list_to_driver()
+odb_main.c:93:2: Return value (type int) ignored: list_to_report()
+odb_main.c: (in function user_menu)
+odb_main.c:105:3: Return value (type int) ignored: scanf("%d", &ch1)
+odb_main.c:109:12: Return value (type int) ignored: add_user_data()
+odb_main.c:111:12: Return value (type int) ignored: edit_user_data()
+odb_main.c:113:12: Return value (type int) ignored: book_driver()
+odb_main.c:115:12: Return value (type int) ignored: show_top_drivers()
+odb_main.c:117:12: Return value (type int) ignored: cancel_ride()
+odb_main.c: (in function driver_menu)
+odb_main.c:135:3: Return value (type int) ignored: scanf("%d", &ch2)
+odb_main.c:138:12: Return value (type int) ignored: add_driver_data()
+odb_main.c:140:12: Return value (type int) ignored: edit_driver_data()
+odb_main.c: (in function admin_menu)
+odb_main.c:158:3: Return value (type int) ignored: scanf("%d", &ch3)
+odb_main.c:161:12: Return value (type int) ignored: user_maintainance()
+odb_main.c:163:12: Return value (type int) ignored: driver_maintaina...
+odb_main.c:165:12: Return value (type int) ignored: ride_report()
+odb_main.c:167:12: Return value (type int) ignored: display_cancelle...
+odb_main.c:169:12: Return value (type int) ignored: display_records()
+odb_main.c:171:12: Return value (type int) ignored: list_of_routes()
+odb_main.c: (in function password)
+odb_main.c:201:13: Operand of ! is non-boolean (size_t): !sz
+  The operand of a boolean operator is not a boolean. Use +ptrnegate to allow !
+  to be used on pointers. (Use -boolops to inhibit warning)
+odb_main.c:208:25: Unqualified storage *pw passed as only param:
+                      realloc (*pw, ...)
+  Unqualified storage is transferred in an inconsistent way. (Use
+  -unqualifiedtrans to inhibit warning)
+odb_main.c:210:14: Released storage *pw reachable from parameter at return
+                      point
+  Memory is used after it has been released (either by passing as an only param
+  or assigning to an only global). (Use -usereleased to inhibit warning)
+   odb_main.c:208:25: Storage *pw released
+odb_main.c:218:20: Passed storage old_kbd_mode contains 8 undefined fields:
+                      c_iflag, c_oflag, c_cflag, c_lflag, ...
+  Storage derivable from a parameter, return value or global is not defined.
+  Use /*@out@*/ to denote passed or returned storage which need not be defined.
+  (Use -compdef to inhibit warning)
+odb_main.c:218:6: Test expression for if not boolean, type int:
+                     tcgetattr(0, &old_kbd_mode)
+  Test expression type is not boolean or int. (Use -predboolint to inhibit
+  warning)
+odb_main.c:225:2: Assignment of int to cc_t: new_kbd_mode.c_cc[5] = 0
+  Types are incompatible. (Use -type to inhibit warning)
+odb_main.c:226:2: Assignment of int to cc_t: new_kbd_mode.c_cc[6] = 1
+odb_main.c:227:6: Test expression for if not boolean, type int:
+                     tcsetattr(0, 0, &new_kbd_mode)
+odb_main.c:233:10: Operands of != have incompatible types (int, char):
+                      (c = fgetc(fp)) != '\n'
+  A character constant is used as an int. Use +charintliteral to allow
+  character constants to be used as ints.  (This is safe since the actual type
+  of a char constant is int.)
+odb_main.c:238:5: Return value (type int) ignored: fputc(mask, stdout)
+odb_main.c:239:4: Assignment of int to char: (*pw)[idx++] = c
+  To make char and int types equivalent, use +charint.
+odb_main.c:245:5: Return value (type int) ignored: fputc(0x8, stdout)
+odb_main.c:246:5: Return value (type int) ignored: fputc(' ', stdout)
+odb_main.c:247:5: Return value (type int) ignored: fputc(0x8, stdout)
+odb_main.c:251:2: Assignment of int to char: (*pw)[idx] = 0
+odb_main.c:253:6: Test expression for if not boolean, type int:
+                     tcsetattr(0, 0, &old_kbd_mode)
+odb_main.c:259:23: Operands of != have incompatible types (int, char):
+                      c != '\n'
+odb_main.c:260:49: Unrecognized format code: %zu chars.)\n
+  Format code in a format string is not valid. (Use -formatcode to inhibit
+  warning)
+odb_main.c:261:9: Return value type size_t does not match declared type
+                     ssize_t: idx
+  To allow arbitrary integral types to match any integral type, use
+  +matchanyintegral.
+odb_main.c: (in function checkpassword)
+odb_main.c:266:16: Initializer block for pw has 1 element, but declared as char
+                      [32]: 0
+  Initializer does not define all elements of a declared array. (Use
+  -initallelements to inhibit warning)
+odb_main.c:266:17: Initial value of pw[0] is type int, expects char: 0
+odb_main.c:270:26: Function password expects arg 3 to be int gets char: '*'
+odb_main.c:274:26: Function password expects arg 3 to be int gets char: '*'
+odb_main.c: (in function getpassword)
+odb_main.c:288:14: Initializer block for pw has 1 element, but declared as char
+                      [32]: 0
+odb_main.c:288:15: Initial value of pw[0] is type int, expects char: 0
+odb_main.c:293:23: Function password expects arg 3 to be int gets char: '*'
+odb_main.c:296:23: Function password expects arg 3 to be int gets char: '*'
+odb_main.c:297:9: Stack-allocated storage pt reachable from return value: pt
+  A stack reference is pointed to by an external reference when the function
+  returns. The stack-allocated storage is destroyed after the call, leaving a
+  dangling reference. (Use -stackref to inhibit warning)
+   odb_main.c:289:2: Storage pt becomes stack-allocated storage
+odb_main.c:297:12: Function returns with global pt referencing released storage
+  A global variable does not satisfy its annotations when control is
+  transferred. (Use -globstate to inhibit warning)
+   odb_main.c:297:9: Storage pt released
+odb_main.c:29:7: Variable exported but not used outside odb_main: pt
+  A declaration is exported, but not used outside this module. Declaration can
+  use static qualifier. (Use -exportlocal to inhibit warning)
+
+Finished checking --- 57 code warnings
+
